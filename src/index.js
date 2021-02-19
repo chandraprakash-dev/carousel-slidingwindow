@@ -4,23 +4,28 @@ const images = document.querySelector('.images');
 const prev = carousel.querySelector('.prev');
 const next = carousel.querySelector('.next');
 
-const width = 150;
-const count = 3;
-let position = 0;
+// Required globals, modify these values when the count
+// size, no. of images required in a scroll change
+const imageWidth = 130;
+const ribbonWidth = 3;
+let currentPosition = 0;
+let newPosition = 0;
+const imageCount = 9;
 
-function scrollLeft() {
-  position += count;
-  console.log(position);
-  const off = position * width;
+function scroll(left=true) {
+  if(left) {
+    newPosition = currentPosition + ribbonWidth;
+  } else {
+    newPosition = currentPosition - ribbonWidth;
+  }
+  console.log(newPosition);
+  if(newPosition < 0 || newPosition > imageCount) return;
+
+  currentPosition = newPosition;
+
+  const off = currentPosition * imageWidth;
   images.style.transform = `translateX(-${off}px)`;
 }
 
-function scrollRight() {
-  position -= count;
-  console.log(position);
-  const off = position * width;
-  images.style.transform = `translateX(-${off}px)`;
-}
-
-prev.addEventListener('click', scrollRight);
-next.addEventListener('click', scrollLeft);
+prev.addEventListener('click', scroll);
+next.addEventListener('click', () => scroll(false));
