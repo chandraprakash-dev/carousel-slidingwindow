@@ -18,7 +18,7 @@ function scroll(left=true) {
   } else {
     newPosition = currentPosition - ribbonWidth;
   }
-  console.log(newPosition);
+
   if(newPosition < 0 || newPosition > imageCount) return;
 
   currentPosition = newPosition;
@@ -27,5 +27,5 @@ function scroll(left=true) {
   images.style.transform = `translateX(-${off}px)`;
 }
 
-prev.addEventListener('click', scroll);
-next.addEventListener('click', () => scroll(false));
+next.addEventListener('click', scroll);
+prev.addEventListener('click', () => scroll(false));
